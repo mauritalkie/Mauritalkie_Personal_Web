@@ -1,0 +1,30 @@
+nav {
+    display: flex;
+    background-color: aqua;
+    border: solid 3px black;
+    border-radius: 5px;
+    height: 100px;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+select {
+    min-width: 150px;
+}
+
+.description-container div {
+    display: flex;
+    justify-content: end;
+}
+
+.container {
+    display: flex;
+    gap: 15px;
+}
+
+.data-container {
+}
+
+.description-container {
+}

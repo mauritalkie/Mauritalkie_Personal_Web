@@ -4,7 +4,7 @@ import { PortfolioComponent } from './components/viewer/portfolio/portfolio.comp
 import { AboutMeComponent } from './components/viewer/about-me/about-me.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
+    {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
     {path: 'portfolio', component: PortfolioComponent},
     {path: 'about_me', component: AboutMeComponent}

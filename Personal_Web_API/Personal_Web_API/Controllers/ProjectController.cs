@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Personal_Web_API.Dtos;
 using Personal_Web_API.Models;
+using Personal_Web_API.Services.Interfaces;
 
 namespace Personal_Web_API.Controllers
 {
@@ -9,61 +11,41 @@ namespace Personal_Web_API.Controllers
 	[ApiController]
 	public class ProjectController : ControllerBase
 	{
-		private readonly PersonalWebDbContext _context;
+		private readonly IProjectService _projectService;
 
-		public ProjectController(PersonalWebDbContext context)
+		public ProjectController(IProjectService projectService)
 		{
-			_context = context;
+			_projectService = projectService;
 		}
 
 		[HttpGet]
-		public async Task<List<Project>> GetProjects()
+		public async Task<List<GetProject>> GetProjects()
 		{
-			return await _context.Projects.ToListAsync();
+			return await _projectService.GetProjects();
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> CreateProject(Project project)
+		public async Task<ActionResult> CreateProject(CreateProject projectDto)
 		{
-			_context.Projects.Add(project);
-			await _context.SaveChangesAsync();
-			return StatusCode(200, "Success");
+			return await _projectService.CreateProject(projectDto);
 		}
 
 		[HttpPut]
-		public async Task<ActionResult> UpdateProject(Project project)
+		public async Task<ActionResult> UpdateProject(UpdateProject projectDto)
 		{
-			var dbProject = await _context.Projects.FindAsync(project.Id);
-			if (dbProject == null) return StatusCode(404, "Not Found");
-
-			dbProject.ProjectName = project.ProjectName;
-			dbProject.ProjectUrl = project.ProjectUrl;
-			dbProject.ImageUrl = project.ImageUrl;
-			dbProject.UpdatedAt = DateTime.Now;
-
-			await _context.SaveChangesAsync();
-			return StatusCode(200, "Success");
+			return await _projectService.UpdateProject(projectDto);
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<ActionResult> DeleteProject(int id)
 		{
-			var dbProject = await _context.Projects.FindAsync(id);
-			if (dbProject == null) return StatusCode(404, "Not Found");
-
-			_context.Projects.Remove(dbProject);
-			await _context.SaveChangesAsync();
-
-			return StatusCode(200, "Success");
+			return await _projectService.DeleteProject(id);
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Project>> GetProjectById(int id)
+		public async Task<ActionResult<GetProject>> GetProjectById(int id)
 		{
-			var dbProject = await _context.Projects.FindAsync(id);
-			if (dbProject == null) return StatusCode(404, "Not Found");
-
-			return dbProject;
+			return await _projectService.GetProjectById(id);
 		}
 	}
 }

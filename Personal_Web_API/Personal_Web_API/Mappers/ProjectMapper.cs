@@ -10,6 +10,7 @@ namespace Personal_Web_API.Mappers
 			return new GetProject (
 				obj.Id,
 				obj.ProjectName,
+				obj.ProjectDescription,
 				obj.ProjectUrl,
 				obj.ImageUrl
 			);
@@ -20,6 +21,7 @@ namespace Personal_Web_API.Mappers
 			return new Project
 			{
 				ProjectName = dto.ProjectName,
+				ProjectDescription = dto.ProjectDescription,
 				ProjectUrl = dto.ProjectUrl,
 				ImageUrl = dto.ImageUrl
 			};

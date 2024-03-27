@@ -9,7 +9,11 @@ public partial class Experience
 
     public string ExperienceDescription { get; set; } = null!;
 
+    public int ExperienceUserId { get; set; }
+
     public DateTime? CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
+
+    public virtual User ExperienceUser { get; set; } = null!;
 }

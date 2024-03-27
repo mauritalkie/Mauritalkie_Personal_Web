@@ -9,7 +9,11 @@ public partial class AboutMe
 
     public string AboutMeDescription { get; set; } = null!;
 
+    public int AboutMeUserId { get; set; }
+
     public DateTime? CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
+
+    public virtual User AboutMeUser { get; set; } = null!;
 }

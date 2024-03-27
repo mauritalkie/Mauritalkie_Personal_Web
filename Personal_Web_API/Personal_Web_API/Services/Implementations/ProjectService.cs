@@ -45,9 +45,16 @@ namespace Personal_Web_API.Services.Implementations
 			return ProjectMapper.AsDto(dbProject);
 		}
 
-		public async Task<List<GetProject>> GetProjects()
+		public async Task<List<GetProject>> GetProjects(int? userId = null)
 		{
-			List<Project> objects = await _context.Projects.ToListAsync();
+			IQueryable<Project> query = _context.Projects;
+
+			if (userId.HasValue)
+			{
+				query = query.Where(p => p.ProjectUserId == userId);
+			}
+
+			List<Project> objects = await query.ToListAsync();
 			List<GetProject> dtos = objects.Select(obj => ProjectMapper.AsDto(obj)).ToList();
 			return dtos;
 		}

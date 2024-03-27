@@ -14,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<PersonalWebDbContext>();
 
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddCors(options => options.AddPolicy(name: "PersonalWebOrigin",
 	policy =>

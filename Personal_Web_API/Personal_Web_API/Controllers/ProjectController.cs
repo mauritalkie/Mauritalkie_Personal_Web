@@ -18,10 +18,10 @@ namespace Personal_Web_API.Controllers
 			_projectService = projectService;
 		}
 
-		[HttpGet]
-		public async Task<List<GetProject>> GetProjects()
+		[HttpGet("Projects/{id}")]
+		public async Task<List<GetProject>> GetProjects(int id)
 		{
-			return await _projectService.GetProjects();
+			return await _projectService.GetProjects(id);
 		}
 
 		[HttpPost]

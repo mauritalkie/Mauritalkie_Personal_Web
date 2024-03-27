@@ -1,7 +1,6 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: #87CEEB;
     color: #FFF;
     row-gap: 20px;
 }
@@ -34,9 +33,10 @@ h1 {
     flex-direction: column;
     align-items: center;
     row-gap: 10px;
+    max-width: 575px;
 }
 
-.item-container p {
+.item-container h3 {
     font-size: 35px;
 }
 
@@ -45,13 +45,18 @@ img {
     height: 250px;
 }
 
-a {
-    text-decoration: none;
-    color: #FFF;
-    background-color: transparent;
-}
-
 .item-container a {
+    text-decoration: none;
     color: #4B0082;
     font-size: 25px;
+}
+
+.link-container {
+    height: 100%;
+    display: flex;
+    align-items: end;
+}
+
+.item-container p {
+    font-size: 20px;
 }

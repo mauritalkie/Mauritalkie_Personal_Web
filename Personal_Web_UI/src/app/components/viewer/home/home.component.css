@@ -4,16 +4,6 @@ body {
     row-gap: 40px;
 }
 
-nav {
-    display: flex;
-    height: 80px;
-    font-size: 30px;
-    justify-content: start;
-    align-items: center;
-    background-color: #6A5ACD;
-    column-gap: 25px;
-}
-
 img {
     width: 1150px;
     height: 350px;
@@ -25,10 +15,4 @@ img {
     align-items: center;
     color: #FFF;
     row-gap: 10px;
-}
-
-a {
-    text-decoration: none;
-    color: #FFF;
-    background-color: transparent;
 }

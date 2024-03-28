@@ -15,6 +15,11 @@ builder.Services.AddDbContext<PersonalWebDbContext>();
 
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAboutMeService, AboutMeService>();
+builder.Services.AddScoped<IExperienceService, ExperienceService>();
+builder.Services.AddScoped<IFutureProjectService, FutureProjectService>();
+builder.Services.AddScoped<ISkillService, SkillService>();
+builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
 
 builder.Services.AddCors(options => options.AddPolicy(name: "PersonalWebOrigin",
 	policy =>

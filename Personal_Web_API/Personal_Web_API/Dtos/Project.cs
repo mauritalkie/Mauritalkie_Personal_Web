@@ -7,6 +7,7 @@
 		string ProjectUrl,
 		string ImageUrl
 	);
+
 	public record CreateProject (
 		string ProjectName,
 		string ProjectDescription,

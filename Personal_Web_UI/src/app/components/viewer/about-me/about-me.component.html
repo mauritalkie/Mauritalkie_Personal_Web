@@ -9,8 +9,12 @@
         </div>
 
         <div class="description-container">
-            <div><select name="" id=""></select></div>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga illo necessitatibus aut ipsa nobis nisi voluptates rem aperiam soluta, culpa suscipit asperiores deserunt, expedita commodi quidem odio earum dolore optio!</p>
+            <div>
+                <select [(ngModel)]="selectedOption" (change)="onOptionChange()">
+                    <option *ngFor="let option of options" [value]="option.value"> {{ option.text }}</option>
+                </select>
+            </div>
+            <p>{{ selectedOption }}</p>
         </div>
     </div>
 </body>

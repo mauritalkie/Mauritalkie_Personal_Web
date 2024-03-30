@@ -3,17 +3,11 @@ using System.Collections.Generic;
 
 namespace Personal_Web_API.Models;
 
-public partial class Project
+public partial class FutureProject
 {
     public int Id { get; set; }
 
-    public string ProjectName { get; set; } = null!;
-
     public string ProjectDescription { get; set; } = null!;
-
-    public string ProjectUrl { get; set; } = null!;
-
-    public string ImageUrl { get; set; } = null!;
 
     public int ProjectUserId { get; set; }
 

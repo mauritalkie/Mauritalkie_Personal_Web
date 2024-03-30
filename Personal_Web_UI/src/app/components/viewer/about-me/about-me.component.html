@@ -1,0 +1,53 @@
+<body>
+    <app-navbar></app-navbar>
+
+    <div class="container">
+        <div class="data-container">
+            <img src={{imageUrl}}>
+            <h3>{{username}}</h3>
+            @for (media of socialMedia; track $index) {
+                <div class="social-media-container">
+                    <img class="icon" src={{media.imageUrl}}>
+                    <a href={{media.socialMediaUrl}}>{{media.socialMediaName}}</a>
+                </div>
+            }
+        </div>
+
+        <div class="description-container">
+            <div>
+                <select [(ngModel)]="selectedOption">
+                    <option *ngFor="let option of options" [value]="option.value"> {{ option.text }}</option>
+                </select>
+            </div>
+            @switch (selectedOption) {
+                @case ("about_me") {
+                    <p>{{aboutMe}}</p>
+                }
+                @case ("skills") {
+                    <ul>
+                        @for (skill of skills; track $index) {
+                            <li>{{skill.skillDescription}}</li>
+                        }
+                    </ul>
+                }
+                @case ("experience") {
+                    <ul>
+                        @for (exp of experience; track $index) {
+                            <li>{{exp.experienceDescription}}</li>
+                        }
+                    </ul>
+                }
+                @case ("future_projects") {
+                    <ul>
+                        @for (project of futureProjects; track $index) {
+                            <li>{{project.projectDescription}}</li>
+                        }
+                    </ul>
+                }
+                @default {
+                    <p>Oops, it looks like something went wrong</p>
+                }
+            }
+        </div>
+    </div>
+</body>

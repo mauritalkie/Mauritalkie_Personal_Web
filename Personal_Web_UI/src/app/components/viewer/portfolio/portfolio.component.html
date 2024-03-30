@@ -4,13 +4,13 @@
     <h1>here goes projects!</h1>
     
     <div class="project-container">
-        @for (project of projects; track project.Id) {
+        @for (project of projects; track $index) {
             <div class="item-container">
-                <img src={{project.ImageUrl}}>
-                <h3>{{project.ProjectName}}</h3>
-                <p>{{project.ProjectDescription}}</p>
+                <img src={{project.imageUrl}}>
+                <h3>{{project.projectName}}</h3>
+                <p>{{project.projectDescription}}</p>
                 <div class="link-container">
-                    <a href={{project.ProjectUrl}}>Ir al repositorio</a>
+                    <a href={{project.projectUrl}}>Ir al repositorio</a>
                 </div>
             </div>
         }

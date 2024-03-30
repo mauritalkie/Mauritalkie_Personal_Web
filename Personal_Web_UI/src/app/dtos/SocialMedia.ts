@@ -1,5 +1,5 @@
 export class GetSocialMedia {
-    SocialMediaName?: string;
-    SocialMediaUrl?: string;
-    ImageUrl?: string;
+    socialMediaName?: string;
+    socialMediaUrl?: string;
+    imageUrl?: string;
 }

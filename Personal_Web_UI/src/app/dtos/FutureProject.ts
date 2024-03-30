@@ -1,3 +1,3 @@
 export class GetFutureProject {
-    FutureProjectDescription?: string;
+    projectDescription?: string;
 }

@@ -15,12 +15,10 @@ namespace Personal_Web_API.Mappers
 			};
 		}
 
-		public static LoginUser AsDto(User obj)
+		public static SessionUser AsDto(string token)
 		{
-			return new LoginUser (
-				obj.Id,
-				obj.Username,
-				obj.UserHashedPassword
+			return new SessionUser (
+				token
 			);
 		}
 	}

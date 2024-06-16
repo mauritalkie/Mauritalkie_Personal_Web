@@ -29,15 +29,21 @@ namespace Personal_Web_API.Controllers
 		}
 
 		[HttpPost("Login")]
-		public async Task<ActionResult<string>> Login(LoginUser userDto)
+		public async Task<ActionResult<SessionUser>> Login(LoginUser userDto)
 		{
 			return await _userService.Login(userDto);
 		}
 
-		[HttpGet, Authorize]
+		[HttpGet("GetMyName"), Authorize]
 		public ActionResult<string> GetMyName()
 		{
 			return Ok(_userService.GetMyName());
+		}
+
+		[HttpGet("GetMyId"), Authorize]
+		public ActionResult<int> GetMyId()
+		{
+			return Ok(_userService.GetMyId());
 		}
 	}
 }

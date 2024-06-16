@@ -15,9 +15,14 @@ namespace Personal_Web_API.Dtos
 		string UserPictureUrl
 	);
 
-	public record LoginUser (
-		int Id,
-		string Username,
-		string UserPassword
+	public class LoginUser
+	{
+		public int Id { get; set; }
+		public string Username { get; set; }
+		public string UserPassword { get; set; }
+	}
+
+	public record SessionUser (
+		string token	
 	);
 }

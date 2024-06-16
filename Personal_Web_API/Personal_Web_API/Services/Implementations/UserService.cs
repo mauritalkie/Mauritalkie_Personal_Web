@@ -31,6 +31,7 @@ namespace Personal_Web_API.Services.Implementations
 			List<Claim> claims = new List<Claim>
 			{
 				new Claim(ClaimTypes.Name, userDto.Username),
+				new Claim(ClaimTypes.NameIdentifier, userDto.Id.ToString()),
 				new Claim(ClaimTypes.Role, "Admin"),
 				new Claim(ClaimTypes.Role, "User")
 			};
@@ -66,7 +67,7 @@ namespace Personal_Web_API.Services.Implementations
 			return await _context.DisplayUsers.FromSqlInterpolated($"EXEC sp_display_user_info {userId}").ToListAsync();
 		}
 
-		public async Task<ActionResult<string>> Login(LoginUser userDto)
+		public async Task<ActionResult<SessionUser>> Login(LoginUser userDto)
 		{
 			var dbUser = await _context.Users.Where(entity => entity.Username == userDto.Username).FirstOrDefaultAsync();
 
@@ -80,9 +81,11 @@ namespace Personal_Web_API.Services.Implementations
 				return new JsonResult("Wrong password");
 			}
 
+			userDto.Id = dbUser.Id;
+
 			string token = CreateToken(userDto);
 
-			return token;
+			return UserMapper.AsDto(token);
 		}
 
 		public string GetMyName()
@@ -91,6 +94,16 @@ namespace Personal_Web_API.Services.Implementations
 			if(_contextAccessor.HttpContext is not null)
 			{
 				result = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+			}
+			return result;
+		}
+
+		public string GetMyId()
+		{
+			var result = string.Empty;
+			if(_contextAccessor.HttpContext is not null)
+			{
+				result = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 			}
 			return result;
 		}

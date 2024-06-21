@@ -1,0 +1,18 @@
+<body>
+    <app-navbar></app-navbar>
+    
+    <h1>here goes projects!</h1>
+    
+    <div class="project-container">
+        @for (project of projects; track $index) {
+            <div class="item-container">
+                <img src={{project.imageUrl}}>
+                <h3>{{project.projectName}}</h3>
+                <p>{{project.projectDescription}}</p>
+                <div class="link-container">
+                    <a href={{project.projectUrl}}>Ir al repositorio</a>
+                </div>
+            </div>
+        }
+    </div>
+</body>

@@ -23,6 +23,6 @@ namespace Personal_Web_API.Dtos
 	}
 
 	public record SessionUser (
-		string token	
+		string Token	
 	);
 }

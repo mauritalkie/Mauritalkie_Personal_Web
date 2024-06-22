@@ -6,6 +6,7 @@ import { AdminHomeComponent } from './components/owner/home/home.component';
 import { AdminAboutMeComponent } from './components/owner/about-me/about-me.component';
 import { AdminPortfolioComponent } from './components/owner/portfolio/portfolio.component';
 import { LoginComponent } from './components/owner/login/login.component';
+import { ProjectsComponent } from './components/owner/projects/projects.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -16,5 +17,6 @@ export const routes: Routes = [
     {path: 'admin/home', component: AdminHomeComponent},
     {path: 'admin/about_me', component: AdminAboutMeComponent},
     {path: 'admin/portfolio', component: AdminPortfolioComponent},
-    {path: 'login', component: LoginComponent}
+    {path: 'login', component: LoginComponent},
+    {path: 'projects', component: ProjectsComponent}
 ];

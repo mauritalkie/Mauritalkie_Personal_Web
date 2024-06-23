@@ -17,10 +17,16 @@ namespace Personal_Web_API.Controllers
 			_aboutMeService = aboutMeService;
 		}
 
-		[HttpGet("{userId}"), Authorize(Roles = "Admin, User")]
-		public async Task<ActionResult<List<GetAboutMe>>> GetAboutMe(int userId)
+		[HttpGet("Owner/GetAboutMe"), Authorize(Roles = "Admin, User")]
+		public async Task<ActionResult<List<GetAboutMe>>> GetAboutMeOwner()
 		{
-			return await _aboutMeService.GetAboutMe(userId);
+			return await _aboutMeService.GetAboutMeOwner();
+		}
+
+		[HttpGet("Viewer/GetAboutMe")]
+		public async Task<ActionResult<List<GetAboutMe>>> GetAboutMeVieer()
+		{
+			return await _aboutMeService.GetAboutMeViewer();
 		}
 	}
 }

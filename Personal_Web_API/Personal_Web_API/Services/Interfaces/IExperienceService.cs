@@ -5,6 +5,7 @@ namespace Personal_Web_API.Services.Interfaces
 {
 	public interface IExperienceService
 	{
-		public Task<ActionResult<List<GetExperience>>> GetExperience(int userId);
+		public Task<ActionResult<List<GetExperience>>> GetExperienceOwner();
+		public Task<ActionResult<List<GetExperience>>> GetExperienceViewer();
 	}
 }

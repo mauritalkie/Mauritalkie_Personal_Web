@@ -21,8 +21,4 @@ namespace Personal_Web_API.Dtos
 		public string Username { get; set; }
 		public string UserPassword { get; set; }
 	}
-
-	public record SessionUser (
-		string Token	
-	);
 }

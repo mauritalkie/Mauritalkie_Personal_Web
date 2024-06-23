@@ -16,10 +16,16 @@ namespace Personal_Web_API.Controllers
 			_skillService = skillService;
 		}
 
-		[HttpGet("{userId}")]
-		public async Task<ActionResult<List<GetSkill>>> GetSkills(int userId)
+		[HttpGet("Owner/GetSkills")]
+		public async Task<ActionResult<List<GetSkill>>> GetSkillsOwner()
 		{
-			return await _skillService.GetSkills(userId);
+			return await _skillService.GetSkillsOwner();
+		}
+
+		[HttpGet("Viewer/GetSkills")]
+		public async Task<ActionResult<List<GetSkill>>> GetSkillsViewer()
+		{
+			return await _skillService.GetSkillsViewer();
 		}
 	}
 }

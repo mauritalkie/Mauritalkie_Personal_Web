@@ -23,7 +23,8 @@ namespace Personal_Web_API.Mappers
 				ProjectName = dto.ProjectName,
 				ProjectDescription = dto.ProjectDescription,
 				ProjectUrl = dto.ProjectUrl,
-				ImageUrl = dto.ImageUrl
+				ImageUrl = dto.ImageUrl,
+				ProjectUserId = dto.ProjectUserId
 			};
 		}
 	}

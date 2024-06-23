@@ -10,14 +10,17 @@ namespace Personal_Web_API.Services.Implementations
 	public class ProjectService : IProjectService
 	{
 		private readonly PersonalWebDbContext _context;
+		private readonly IUserService _userService;
 
-		public ProjectService(PersonalWebDbContext context)
+		public ProjectService(PersonalWebDbContext context, IUserService userService)
 		{
 			_context = context;
+			_userService = userService;
 		}
 
 		public async Task<ActionResult> CreateProject(CreateProject projectDto)
 		{
+			projectDto.ProjectUserId = int.Parse(_userService.GetMyId());
 			Project project = ProjectMapper.AsObject(projectDto);
 
 			_context.Projects.Add(project);
@@ -45,16 +48,20 @@ namespace Personal_Web_API.Services.Implementations
 			return ProjectMapper.AsDto(dbProject);
 		}
 
-		public async Task<List<GetProject>> GetProjects(int? userId = null)
+		public async Task<List<GetProject>> GetProjectsOwner()
 		{
+			int userId = int.Parse(_userService.GetMyId());
 			IQueryable<Project> query = _context.Projects;
-
-			if (userId.HasValue)
-			{
-				query = query.Where(p => p.ProjectUserId == userId);
-			}
-
+			query = query.Where(p => p.ProjectUserId == userId);
+			
 			List<Project> objects = await query.ToListAsync();
+			List<GetProject> dtos = objects.Select(obj => ProjectMapper.AsDto(obj)).ToList();
+			return dtos;
+		}
+
+		public async Task<List<GetProject>> GetProjectsViewer()
+		{
+			List<Project> objects = await _context.Projects.ToListAsync();
 			List<GetProject> dtos = objects.Select(obj => ProjectMapper.AsDto(obj)).ToList();
 			return dtos;
 		}

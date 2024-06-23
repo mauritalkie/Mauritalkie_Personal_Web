@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Personal_Web_API.Dtos;
 using Personal_Web_API.Services.Interfaces;
@@ -16,10 +17,16 @@ namespace Personal_Web_API.Controllers
 			_socialMediaService = socialMediaService;
 		}
 
-		[HttpGet("{userId}")]
-		public async Task<ActionResult<List<GetSocialMedia>>> GetSocialMedia(int userId)
+		[HttpGet("Owner/GetSocialMedia"), Authorize]
+		public async Task<ActionResult<List<GetSocialMedia>>> GetSocialMediaOwner()
 		{
-			return await _socialMediaService.GetSocialMedia(userId);
+			return await _socialMediaService.GetSocialMediaOwner();
+		}
+
+		[HttpGet("Viewer/GetSocialMedia")]
+		public async Task<ActionResult<List<GetSocialMedia>>> GetSocialMediaViewer()
+		{
+			return await _socialMediaService.GetSocialMediaViewer();
 		}
 	}
 }

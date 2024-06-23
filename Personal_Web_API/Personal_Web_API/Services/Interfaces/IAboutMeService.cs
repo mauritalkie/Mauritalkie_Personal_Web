@@ -5,6 +5,7 @@ namespace Personal_Web_API.Services.Interfaces
 {
 	public interface IAboutMeService
 	{
-		public Task<ActionResult<List<GetAboutMe>>> GetAboutMe(int userId);
+		public Task<ActionResult<List<GetAboutMe>>> GetAboutMeOwner();
+		public Task<ActionResult<List<GetAboutMe>>> GetAboutMeViewer();
 	}
 }

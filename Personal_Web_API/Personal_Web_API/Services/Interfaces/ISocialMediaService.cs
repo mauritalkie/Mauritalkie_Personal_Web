@@ -5,6 +5,7 @@ namespace Personal_Web_API.Services.Interfaces
 {
 	public interface ISocialMediaService
 	{
-		public Task<ActionResult<List<GetSocialMedia>>> GetSocialMedia(int userId);
+		public Task<ActionResult<List<GetSocialMedia>>> GetSocialMediaOwner();
+		public Task<ActionResult<List<GetSocialMedia>>> GetSocialMediaViewer();
 	}
 }

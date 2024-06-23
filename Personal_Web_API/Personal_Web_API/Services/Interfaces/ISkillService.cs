@@ -5,6 +5,7 @@ namespace Personal_Web_API.Services.Interfaces
 {
 	public interface ISkillService
 	{
-		public Task<ActionResult<List<GetSkill>>> GetSkills(int userId);
+		public Task<ActionResult<List<GetSkill>>> GetSkillsOwner();
+		public Task<ActionResult<List<GetSkill>>> GetSkillsViewer();
 	}
 }

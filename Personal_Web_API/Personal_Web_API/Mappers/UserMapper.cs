@@ -14,12 +14,5 @@ namespace Personal_Web_API.Mappers
 				UserPictureUrl = dto.UserPictureUrl
 			};
 		}
-
-		public static SessionUser AsDto(string token)
-		{
-			return new SessionUser (
-				token
-			);
-		}
 	}
 }

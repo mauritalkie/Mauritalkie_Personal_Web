@@ -8,9 +8,9 @@ namespace Personal_Web_API.Mappers
 		public static GetSocialMedia AsDto(SocialMedium obj)
 		{
 			return new GetSocialMedia (
+				obj.Id,
 				obj.SocialMediaName, 
-				obj.SocialMediaUrl, 
-				obj.ImageUrl
+				obj.SocialMediaUrl
 			);
 		}
 	}

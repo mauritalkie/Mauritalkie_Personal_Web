@@ -7,6 +7,7 @@ import { AdminAboutMeComponent } from './components/owner/about-me/about-me.comp
 import { AdminPortfolioComponent } from './components/owner/portfolio/portfolio.component';
 import { LoginComponent } from './components/owner/login/login.component';
 import { ProjectsComponent } from './components/owner/projects/projects.component';
+import { SocialMediaComponent } from './components/owner/social-media/social-media.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -18,5 +19,6 @@ export const routes: Routes = [
     {path: 'admin/about_me', component: AdminAboutMeComponent},
     {path: 'admin/portfolio', component: AdminPortfolioComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'projects', component: ProjectsComponent}
+    {path: 'projects', component: ProjectsComponent},
+    {path: 'social_media', component: SocialMediaComponent}
 ];

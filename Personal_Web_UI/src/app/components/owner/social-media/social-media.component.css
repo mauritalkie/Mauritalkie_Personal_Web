@@ -1,0 +1,30 @@
+div {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+a {
+    margin-right: 30px;
+    color: #FFF;
+    text-decoration: none;
+    font-size: 27px;
+}
+
+button {
+    margin-top: 30px;
+    margin-right: 20px;
+    float: right;
+    background-color: #4682B4;
+    width: 150px;
+    color: #FFF;
+    font-size: 27px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+div button {
+    float: none;
+    margin-top: 0;
+    background-color: #6A5ACD;
+}

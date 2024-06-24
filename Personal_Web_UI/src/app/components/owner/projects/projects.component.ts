@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { GetProject } from '../../../dtos/Project';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +19,9 @@ export class ProjectsComponent {
   currentName?: string = '';
   currentDescription?: string = '';
   currentUrl?: string = '';
-  currentImage?: string = '';
+  currentImage?: string = 'https://linamed.com/wp-content/themes/dfd-native/assets/images/no_image_resized_675-450.jpg';
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   projects: GetProject[] = [
     {
@@ -72,6 +74,20 @@ export class ProjectsComponent {
     }
     else {
       alert('Creating project');
+    }
+  }
+
+  onImageClick() {
+    this.fileInput.nativeElement.click();
+  }
+
+  onSelectFile(e: any) {
+    if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event: any) => {
+        this.currentImage = event.target.result;
+      }
     }
   }
 }

@@ -1,35 +1,13 @@
 <body>
     <app-navbar></app-navbar>
 
-    <div>
-        <a href="google.com.mx">Google</a>
-        <button>Edit</button>
-        <button>Delete</button>
-    </div>
-
-    <div>
-        <a href="google.com.mx">Google</a>
-        <button>Edit</button>
-        <button>Delete</button>
-    </div>
-
-    <div>
-        <a href="google.com.mx">Google</a>
-        <button>Edit</button>
-        <button>Delete</button>
-    </div>
-
-    <div>
-        <a href="google.com.mx">Google</a>
-        <button>Edit</button>
-        <button>Delete</button>
-    </div>
-
-    <div>
-        <a href="google.com.mx">Google</a>
-        <button>Edit</button>
-        <button>Delete</button>
-    </div>
+    @for (media of socialMedia; track $index) {
+        <div>
+            <a [href]="media.SocialMediaUrl">{{ media.SocialMediaName }}</a>
+            <button [id]="media.Id">Edit</button>
+            <button [id]="media.Id" (click)="deleteSocialMedia(media.Id)">Delete</button>
+        </div>
+    }
 
     <button>Add New</button>
 </body>

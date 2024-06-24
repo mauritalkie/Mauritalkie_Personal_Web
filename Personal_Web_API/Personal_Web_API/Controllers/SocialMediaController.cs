@@ -28,5 +28,23 @@ namespace Personal_Web_API.Controllers
 		{
 			return await _socialMediaService.GetSocialMediaViewer();
 		}
+
+		[HttpPost, Authorize]
+		public async Task<ActionResult> CreateSocialMedia(CreateSocialMedia socialMediaDto)
+		{
+			return await _socialMediaService.CreateSocialMedia(socialMediaDto);
+		}
+
+		[HttpPut, Authorize]
+		public async Task<ActionResult> UpdateSocialMedia(UpdateSocialMedia socialMediaDto)
+		{
+			return await _socialMediaService.UpdateSocialMedia(socialMediaDto);
+		}
+
+		[HttpDelete("{id}"), Authorize]
+		public async Task<ActionResult> DeleteSocialMedia(int id)
+		{
+			return await _socialMediaService.DeleteSocialMedia(id);
+		}
 	}
 }

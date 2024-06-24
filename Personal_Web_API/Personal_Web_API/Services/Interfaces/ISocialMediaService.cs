@@ -7,5 +7,8 @@ namespace Personal_Web_API.Services.Interfaces
 	{
 		public Task<ActionResult<List<GetSocialMedia>>> GetSocialMediaOwner();
 		public Task<ActionResult<List<GetSocialMedia>>> GetSocialMediaViewer();
+		public Task<ActionResult> CreateSocialMedia(CreateSocialMedia socialMediaDto);
+		public Task<ActionResult> UpdateSocialMedia(UpdateSocialMedia socialMediaDto);
+		public Task<ActionResult> DeleteSocialMedia(int id);
 	}
 }

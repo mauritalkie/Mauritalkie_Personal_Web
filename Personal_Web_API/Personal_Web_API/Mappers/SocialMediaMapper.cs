@@ -13,5 +13,15 @@ namespace Personal_Web_API.Mappers
 				obj.SocialMediaUrl
 			);
 		}
+
+		public static SocialMedium AsObject(CreateSocialMedia obj)
+		{
+			return new SocialMedium
+			{
+				SocialMediaName = obj.SocialMediaName,
+				SocialMediaUrl = obj.SocialMediaUrl,
+				SocialMediaUserId = obj.SocialMediaUserId
+			};
+		}
 	}
 }

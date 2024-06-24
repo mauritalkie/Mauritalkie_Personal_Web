@@ -66,14 +66,14 @@ namespace Personal_Web_API.Services.Implementations
 			return dtos;
 		}
 
-		public async Task<ActionResult> UpdateProject(UpdateProject project)
+		public async Task<ActionResult> UpdateProject(UpdateProject projectDto)
 		{
-			var dbProject = await _context.Projects.FindAsync(project.Id);
+			var dbProject = await _context.Projects.FindAsync(projectDto.Id);
 			if (dbProject == null) return new JsonResult("Project not found");
 
-			dbProject.ProjectName = project.ProjectName;
-			dbProject.ProjectUrl = project.ProjectUrl;
-			dbProject.ImageUrl = project.ImageUrl;
+			dbProject.ProjectName = projectDto.ProjectName;
+			dbProject.ProjectUrl = projectDto.ProjectUrl;
+			dbProject.ImageUrl = projectDto.ImageUrl;
 			dbProject.UpdatedAt = DateTime.Now;
 
 			await _context.SaveChangesAsync();

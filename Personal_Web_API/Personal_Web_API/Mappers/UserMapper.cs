@@ -14,5 +14,13 @@ namespace Personal_Web_API.Mappers
 				UserPictureUrl = dto.UserPictureUrl
 			};
 		}
+
+		public static GetUser AsDto(User obj)
+		{
+			return new GetUser (
+				obj.Username,
+				obj.UserPictureUrl
+			);
+		}
 	}
 }

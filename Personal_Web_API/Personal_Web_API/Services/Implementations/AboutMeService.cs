@@ -19,6 +19,17 @@ namespace Personal_Web_API.Services.Implementations
 			_userService = userService;
 		}
 
+		public async Task<ActionResult> CreateAboutMe(CreateAboutMe aboutMeDto)
+		{
+			aboutMeDto.AboutMeUserId = int.Parse(_userService.GetMyId());
+			AboutMe aboutMe = AboutMeMapper.AsObject(aboutMeDto);
+
+			_context.AboutMes.Add(aboutMe);
+			await _context.SaveChangesAsync();
+
+			return new JsonResult("About me created successfully");
+		}
+
 		public async Task<ActionResult<List<GetAboutMe>>> GetAboutMeOwner()
 		{
 			int userId = int.Parse(_userService.GetMyId());
@@ -35,6 +46,18 @@ namespace Personal_Web_API.Services.Implementations
 			List<AboutMe> objects = await _context.AboutMes.ToListAsync();
 			List<GetAboutMe> dtos = objects.Select(obj => AboutMeMapper.AsDto(obj)).ToList();
 			return dtos;
+		}
+
+		public async Task<ActionResult> UpdateAboutMe(UpdateAboutMe aboutMeDto)
+		{
+			var dbAboutMe = await _context.AboutMes.FindAsync(aboutMeDto.Id);
+			if (dbAboutMe == null) return new JsonResult("About me not found");
+
+			dbAboutMe.AboutMeDescription = aboutMeDto.AboutMeDescription;
+			dbAboutMe.UpdatedAt = DateTime.Now;
+
+			await _context.SaveChangesAsync();
+			return new JsonResult("About me updated successfully");
 		}
 	}
 }

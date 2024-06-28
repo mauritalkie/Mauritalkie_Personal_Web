@@ -21,4 +21,15 @@ namespace Personal_Web_API.Dtos
 		public string Username { get; set; }
 		public string UserPassword { get; set; }
 	}
+
+	public record GetUser (
+		string Username,
+		string UserPictureUrl
+	);
+
+	public record UpdateUser (
+		string Username,
+		string UserPassword,
+		string UserPictureUrl
+	);
 }

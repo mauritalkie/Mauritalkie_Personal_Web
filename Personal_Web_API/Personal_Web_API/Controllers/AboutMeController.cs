@@ -24,9 +24,21 @@ namespace Personal_Web_API.Controllers
 		}
 
 		[HttpGet("Viewer/GetAboutMe")]
-		public async Task<ActionResult<List<GetAboutMe>>> GetAboutMeVieer()
+		public async Task<ActionResult<List<GetAboutMe>>> GetAboutMeViewer()
 		{
 			return await _aboutMeService.GetAboutMeViewer();
+		}
+
+		[HttpPost, Authorize]
+		public async Task<ActionResult> CreateAboutMe(CreateAboutMe aboutMeDto)
+		{
+			return await _aboutMeService.CreateAboutMe(aboutMeDto);
+		}
+
+		[HttpPut, Authorize]
+		public async Task<ActionResult> UpdateAboutMe(UpdateAboutMe aboutMeDto)
+		{
+			return await _aboutMeService.UpdateAboutMe(aboutMeDto);
 		}
 	}
 }

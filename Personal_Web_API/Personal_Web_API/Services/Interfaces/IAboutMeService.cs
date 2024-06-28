@@ -7,5 +7,7 @@ namespace Personal_Web_API.Services.Interfaces
 	{
 		public Task<ActionResult<List<GetAboutMe>>> GetAboutMeOwner();
 		public Task<ActionResult<List<GetAboutMe>>> GetAboutMeViewer();
+		public Task<ActionResult> CreateAboutMe(CreateAboutMe aboutMeDto);
+		public Task<ActionResult> UpdateAboutMe(UpdateAboutMe aboutMeDto);
 	}
 }

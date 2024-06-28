@@ -16,10 +16,16 @@ namespace Personal_Web_API.Controllers
 			_userService = userService;
 		}
 
-		[HttpGet("DisplayInfo/{userId}")]
-		public async Task<ActionResult<List<DisplayUserInfo>>> DisplayUserInfo(int userId)
+		[HttpGet("DisplayInfoViewer/{userId}")]
+		public async Task<ActionResult<List<DisplayUserInfo>>> DisplayUserInfoViewer(int userId)
 		{
-			return await _userService.DisplayUserInfo(userId);
+			return await _userService.DisplayUserInfoViewer(userId);
+		}
+
+		[HttpGet("DisplayInfoOwner"), Authorize]
+		public async Task<ActionResult<List<DisplayUserInfo>>> DisplayUserInfoOwner()
+		{
+			return await _userService.DisplayUserInfoOwner();
 		}
 
 		[HttpPost("Create")]
@@ -44,6 +50,18 @@ namespace Personal_Web_API.Controllers
 		public ActionResult<int> GetMyId()
 		{
 			return Ok(_userService.GetMyId());
+		}
+
+		[HttpPut("Update"), Authorize]
+		public async Task<ActionResult> UpdateUser(UpdateUser userDto)
+		{
+			return await _userService.UpdateUser(userDto);
+		}
+
+		[HttpGet("GetCurrentUser"), Authorize]
+		public async Task<ActionResult<GetUser>> GetCurrentUser()
+		{
+			return await _userService.GetCurrentUser();
 		}
 	}
 }

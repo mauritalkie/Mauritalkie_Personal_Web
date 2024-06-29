@@ -1,3 +1,3 @@
 export class GetExperience {
-    ExperienceDescription?: string;
+    experienceDescription?: string;
 }

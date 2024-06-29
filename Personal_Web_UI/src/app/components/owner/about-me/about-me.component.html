@@ -7,15 +7,15 @@
             <h3>{{username}}</h3>
             @for (media of socialMedia; track $index) {
                 <div class="social-media-container">
-                    <img class="icon" src={{media.ImageUrl}}>
-                    <a href={{media.SocialMediaUrl}}>{{media.SocialMediaName}}</a>
+                    <img class="icon" src={{media.imageUrl}}>
+                    <a href={{media.socialMediaUrl}}>{{media.socialMediaName}}</a>
                 </div>
             }
         </div>
 
         <div class="description-container">
             <div>
-                <select [(ngModel)]="selectedOption" (change)="onOptionChange()">
+                <select [(ngModel)]="selectedOption">
                     <option *ngFor="let option of options" [value]="option.value"> {{ option.text }}</option>
                 </select>
             </div>
@@ -26,21 +26,21 @@
                 @case ("skills") {
                     <ul>
                         @for (skill of skills; track $index) {
-                            <li>{{skill.SkillDescription}}</li>
+                            <li>{{skill.skillDescription}}</li>
                         }
                     </ul>
                 }
                 @case ("experience") {
                     <ul>
                         @for (exp of experience; track $index) {
-                            <li>{{exp.ExperienceDescription}}</li>
+                            <li>{{exp.experienceDescription}}</li>
                         }
                     </ul>
                 }
                 @case ("future_projects") {
                     <ul>
                         @for (project of futureProjects; track $index) {
-                            <li>{{project.FutureProjectDescription}}</li>
+                            <li>{{project.projectDescription}}</li>
                         }
                     </ul>
                 }

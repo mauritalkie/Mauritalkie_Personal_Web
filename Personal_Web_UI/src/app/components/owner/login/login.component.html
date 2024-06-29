@@ -2,12 +2,12 @@
     <div class="login-container">
         <div class="field-container">
             <p>Username</p>
-            <input type="text">
+            <input type="text" [(ngModel)]="loginUser.username">
         </div>
         <div class="field-container">
             <p>Password</p>
-            <input type="password">
+            <input type="password" [(ngModel)]="loginUser.userPassword">
         </div>
-        <button>Login</button>
+        <button (click)="submit()">Login</button>
     </div>    
 </body>

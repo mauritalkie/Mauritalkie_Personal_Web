@@ -22,6 +22,10 @@ namespace Personal_Web_API.Dtos
 		public string UserPassword { get; set; }
 	}
 
+	public record SessionUser(
+		string Token
+	);
+
 	public record GetUser (
 		string Username,
 		string UserPictureUrl

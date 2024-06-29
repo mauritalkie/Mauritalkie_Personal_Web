@@ -73,25 +73,25 @@ namespace Personal_Web_API.Services.Implementations
 			return await _context.DisplayUsers.FromSqlInterpolated($"EXEC sp_display_user_info {userId}").ToListAsync();
 		}
 
-		public async Task<ActionResult<string>> Login(LoginUser userDto)
+		public async Task<ActionResult<SessionUser>> Login(LoginUser userDto)
 		{
 			var dbUser = await _context.Users.Where(entity => entity.Username == userDto.Username).FirstOrDefaultAsync();
 
 			if (dbUser == null)
 			{
-				return "User not found";
+				return new JsonResult("User not found");
 			} 
 
 			if(!BCrypt.Net.BCrypt.Verify(userDto.UserPassword, dbUser.UserHashedPassword))
 			{
-				return "Wrong password";
+				return new JsonResult("Wrong password");
 			}
 
 			userDto.Id = dbUser.Id;
 
-			string token = CreateToken(userDto);
+			SessionUser sessionUser = new SessionUser(CreateToken(userDto));
 
-			return token;
+			return sessionUser;
 		}
 
 		public string GetMyName()

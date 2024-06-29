@@ -12,7 +12,11 @@ export class SkillService {
 
   constructor(private http: HttpClient) { }
 
-  public getSkills(): Observable<GetSkill[]> {
-    return this.http.get<GetSkill[]>(`${environment.apiUrl}/${this.url}/1`);
+  public getSkillsViewer(): Observable<GetSkill[]> {
+    return this.http.get<GetSkill[]>(`${environment.apiUrl}/${this.url}/Viewer/GetSkills`);
+  }
+
+  public getSkillsOwner(): Observable<GetSkill[]> {
+    return this.http.get<GetSkill[]>(`${environment.apiUrl}/${this.url}/Owner/GetSkills`);
   }
 }

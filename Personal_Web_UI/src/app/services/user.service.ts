@@ -12,8 +12,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public displayUserInfo(): Observable<DisplayUserInfo[]> {
-    return this.http.get<DisplayUserInfo[]>(`${environment.apiUrl}/${this.url}/DisplayInfo/1`);
+  public displayUserInfoViewer(): Observable<DisplayUserInfo[]> {
+    return this.http.get<DisplayUserInfo[]>(`${environment.apiUrl}/${this.url}/DisplayInfoViewer/1`);
+  }
+
+  public displayUserInfoOwner(): Observable<DisplayUserInfo[]> {
+    return this.http.get<DisplayUserInfo[]>(`${environment.apiUrl}/${this.url}/DisplayOwner`);
   }
 
   public login(loginUser: LoginUser): Observable<any> {

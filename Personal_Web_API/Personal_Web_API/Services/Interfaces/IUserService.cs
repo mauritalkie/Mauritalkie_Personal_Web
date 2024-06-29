@@ -8,7 +8,7 @@ namespace Personal_Web_API.Services.Interfaces
 		public Task<ActionResult<List<DisplayUserInfo>>> DisplayUserInfoViewer(int userId);
 		public Task<ActionResult<List<DisplayUserInfo>>> DisplayUserInfoOwner();
 		public Task<ActionResult> CreateUser(CreateUser userDto);
-		public Task<ActionResult<string>> Login(LoginUser userDto);
+		public Task<ActionResult<SessionUser>> Login(LoginUser userDto);
 		public Task<ActionResult> UpdateUser(UpdateUser userDto);
 		public Task<ActionResult<GetUser>> GetCurrentUser();
 		public string GetMyName();

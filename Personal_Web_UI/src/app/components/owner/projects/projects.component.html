@@ -5,7 +5,7 @@
 
     <div class="select-container">
         <select [(ngModel)]="selectedProject" (change)="onProjectChange()">
-            <option *ngFor="let project of projects" [value]="project.Id">{{ project.ProjectName }}</option>
+            <option *ngFor="let project of projects" [value]="project.id">{{ project.projectName }}</option>
         </select>
     </div>
 

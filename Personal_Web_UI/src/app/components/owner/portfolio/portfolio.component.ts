@@ -18,6 +18,6 @@ export class AdminPortfolioComponent {
   constructor(private service: ProjectService) { }
 
   ngOnInit(): void {
-    this.service.getProjects().subscribe((response) => this.projects = response);
+    this.service.getProjectsOwner().subscribe((response) => this.projects = response);
   }
 }

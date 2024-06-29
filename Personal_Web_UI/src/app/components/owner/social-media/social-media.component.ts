@@ -14,18 +14,18 @@ export class SocialMediaComponent {
   isModalVisible: boolean = false;
 
   socialMedia: GetSocialMedia[] = [
-    {Id: 1, SocialMediaName: 'quora', SocialMediaUrl: 'quora.com'},
-    {Id: 2, SocialMediaName: 'facebook', SocialMediaUrl: 'facebook.com'},
-    {Id: 3, SocialMediaName: 'twitter', SocialMediaUrl: 'twitter.com'},
-    {Id: 4, SocialMediaName: 'instagram', SocialMediaUrl: 'instagram.com'},
-    {Id: 5, SocialMediaName: 'youtube', SocialMediaUrl: 'youtube.com'},
-    {Id: 6, SocialMediaName: 'linkedin', SocialMediaUrl: 'linkedin.com'},
-    {Id: 7, SocialMediaName: 'github', SocialMediaUrl: 'github.com'},
-    {Id: 8, SocialMediaName: 'pinterest', SocialMediaUrl: 'pinterest.com'},
+    {id: 1, socialMediaName: 'quora', socialMediaUrl: 'quora.com'},
+    {id: 2, socialMediaName: 'facebook', socialMediaUrl: 'facebook.com'},
+    {id: 3, socialMediaName: 'twitter', socialMediaUrl: 'twitter.com'},
+    {id: 4, socialMediaName: 'instagram', socialMediaUrl: 'instagram.com'},
+    {id: 5, socialMediaName: 'youtube', socialMediaUrl: 'youtube.com'},
+    {id: 6, socialMediaName: 'linkedin', socialMediaUrl: 'linkedin.com'},
+    {id: 7, socialMediaName: 'github', socialMediaUrl: 'github.com'},
+    {id: 8, socialMediaName: 'pinterest', socialMediaUrl: 'pinterest.com'},
   ];
 
   deleteSocialMedia(id: any) {
-    this.socialMedia = this.socialMedia.filter(item => item.Id!== id);
+    this.socialMedia = this.socialMedia.filter(item => item.id!== id);
   }
 
   openModal() {

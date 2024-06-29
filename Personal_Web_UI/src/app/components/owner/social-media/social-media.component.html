@@ -1,0 +1,29 @@
+<body>
+    <app-navbar></app-navbar>
+
+    @for (media of socialMedia; track $index) {
+        <div class="social-media-container">
+            <a [href]="media.SocialMediaUrl">{{ media.SocialMediaName }}</a>
+            <button [id]="media.Id">Edit</button>
+            <button [id]="media.Id" (click)="deleteSocialMedia(media.Id)">Delete</button>
+        </div>
+    }
+
+    <button (click)="openModal()">Add New</button>
+</body>
+
+<app-modal [isVisible]="isModalVisible">
+    <div class="close" (click)="closeModal()">&times;</div>
+    <div class="modal-container">
+        <h1 style="background-color: #6A5ACD;">Add / Edit Social Media</h1>
+        <div class="field-container">
+            <p>Name</p>
+            <input type="text">
+        </div>
+        <div class="field-container">
+            <p>Link</p>
+            <input type="text">
+        </div>
+        <button style="background-color: #4682B4; margin-top: 30px;">Save</button>
+    </div>
+</app-modal>

@@ -1,3 +1,3 @@
 export class GetSkill {
-    SkillDescription?: string;
+    skillDescription?: string;
 }

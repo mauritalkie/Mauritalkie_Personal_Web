@@ -4,26 +4,26 @@
     @for (media of socialMedia; track $index) {
         <div class="social-media-container">
             <a [href]="media.socialMediaUrl">{{ media.socialMediaName }}</a>
-            <button [id]="media.id">Edit</button>
+            <button [id]="media.id" (click)="openModal(false, 'Edit', $event)">Edit</button>
             <button [id]="media.id" (click)="deleteSocialMedia(media.id)">Delete</button>
         </div>
     }
 
-    <button (click)="openModal()">Add New</button>
+    <button (click)="openModal(true, 'Add', $event)">Add New</button>
 </body>
 
 <app-modal [isVisible]="isModalVisible">
     <div class="close" (click)="closeModal()">&times;</div>
     <div class="modal-container">
-        <h1 style="background-color: #6A5ACD;">Add / Edit Social Media</h1>
+        <h1 style="background-color: #6A5ACD;">{{ currentAction }} social media</h1>
         <div class="field-container">
             <p>Name</p>
-            <input type="text">
+            <input type="text" [(ngModel)]="currentName">
         </div>
         <div class="field-container">
             <p>Link</p>
-            <input type="text">
+            <input type="text" [(ngModel)]="currentUrl">
         </div>
-        <button style="background-color: #4682B4; margin-top: 30px;">Save</button>
+        <button style="background-color: #4682B4; margin-top: 30px;" (click)="onSubmit()">{{ currentAction }}</button>
     </div>
 </app-modal>

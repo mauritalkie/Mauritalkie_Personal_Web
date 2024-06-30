@@ -11,12 +11,14 @@ export class CreateProject {
     ProjectDescription?: string;
     ProjectUrl?: string;
     ImageUrl?: string;
+    projectUserId?: number;
 
-    constructor(projectName: string, ProjectDescription: string, projectUrl: string, ImageUrl: string) {
+    constructor(projectName: string, ProjectDescription: string, projectUrl: string, ImageUrl: string, projectUserId: number) {
         this.ProjectName = projectName;
         this.ProjectDescription = ProjectDescription;
         this.ProjectUrl = projectUrl;
         this.ImageUrl = ImageUrl;
+        this.projectUserId = projectUserId;
     }
 }
 

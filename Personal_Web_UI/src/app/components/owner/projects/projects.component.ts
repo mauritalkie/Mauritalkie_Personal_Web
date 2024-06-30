@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent {
-  selectedProject?: string;
+  selectedProject?: number;
   updateProject: boolean = false;
   buttonText: string = 'Create';
 
@@ -69,10 +69,27 @@ export class ProjectsComponent {
   }
 
   submitProject() {
+    if(this.currentName === '' || this.currentDescription === '' || this.currentUrl === '') {
+      alert('Please fill all fields');
+      return;
+    }
+    
     if(this.updateProject) {
-      alert('Updating project');
+      //todo: call the service
+      
+      this.projects = this.projects.map(p => p.id == this.selectedProject? 
+        {
+          id: this.selectedProject, 
+          projectName: this.currentName, 
+          projectDescription: this.currentDescription, 
+          projectUrl: this.currentUrl, 
+          imageUrl: this.currentImage
+        } : p);
+
+        alert('Project updated successfully');
     }
     else {
+      //todo: call the service
       alert('Creating project');
     }
   }

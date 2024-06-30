@@ -32,6 +32,12 @@ export class LoginComponent {
   }
 
   submit() {
+    
+    if(this.loginUser.username === '' || this.loginUser.userPassword === '') {
+      alert('Please fill in both username and password.');
+      return;
+    }
+
     this.login(this.loginUser);
   }
 }

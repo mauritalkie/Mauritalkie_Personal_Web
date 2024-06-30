@@ -6,8 +6,8 @@ export class DisplayUserInfo {
 
 export class LoginUser {
     id?: number;
-    username?: string;
-    userPassword?: string;
+    username?: string = '';
+    userPassword?: string = '';
 }
 
 export class SessionUser {

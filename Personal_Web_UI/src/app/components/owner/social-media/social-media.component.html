@@ -3,9 +3,9 @@
 
     @for (media of socialMedia; track $index) {
         <div class="social-media-container">
-            <a [href]="media.SocialMediaUrl">{{ media.SocialMediaName }}</a>
-            <button [id]="media.Id" (click)="openModal(false, 'Edit', $event)">Edit</button>
-            <button [id]="media.Id" (click)="deleteSocialMedia(media.Id)">Delete</button>
+            <a [href]="media.socialMediaUrl">{{ media.socialMediaName }}</a>
+            <button [id]="media.id" (click)="openModal(false, 'Edit', $event)">Edit</button>
+            <button [id]="media.id" (click)="deleteSocialMedia(media.id)">Delete</button>
         </div>
     }
 

@@ -21,18 +21,19 @@ export class SocialMediaComponent {
   currentUrl?: string = '';
 
   socialMedia: GetSocialMedia[] = [
-    {Id: 1, SocialMediaName: 'quora', SocialMediaUrl: 'quora.com'},
-    {Id: 2, SocialMediaName: 'facebook', SocialMediaUrl: 'facebook.com'},
-    {Id: 3, SocialMediaName: 'twitter', SocialMediaUrl: 'twitter.com'},
-    {Id: 4, SocialMediaName: 'instagram', SocialMediaUrl: 'instagram.com'},
-    {Id: 5, SocialMediaName: 'youtube', SocialMediaUrl: 'youtube.com'},
-    {Id: 6, SocialMediaName: 'linkedin', SocialMediaUrl: 'linkedin.com'},
-    {Id: 7, SocialMediaName: 'github', SocialMediaUrl: 'github.com'},
-    {Id: 8, SocialMediaName: 'pinterest', SocialMediaUrl: 'pinterest.com'},
+    {id: 1, socialMediaName: 'quora', socialMediaUrl: 'quora.com'},
+    {id: 2, socialMediaName: 'facebook', socialMediaUrl: 'facebook.com'},
+    {id: 3, socialMediaName: 'twitter', socialMediaUrl: 'twitter.com'},
+    {id: 4, socialMediaName: 'instagram', socialMediaUrl: 'instagram.com'},
+    {id: 5, socialMediaName: 'youtube', socialMediaUrl: 'youtube.com'},
+    {id: 6, socialMediaName: 'linkedin', socialMediaUrl: 'linkedin.com'},
+    {id: 7, socialMediaName: 'github', socialMediaUrl: 'github.com'},
+    {id: 8, socialMediaName: 'pinterest', socialMediaUrl: 'pinterest.com'},
   ];
 
   deleteSocialMedia(id: any) {
-    this.socialMedia = this.socialMedia.filter(item => item.Id!== id);
+    //todo: call the remove service method
+    this.socialMedia = this.socialMedia.filter(item => item.id!== id);
   }
 
   openModal(state: boolean, action: string, event: Event) {
@@ -44,8 +45,8 @@ export class SocialMediaComponent {
       const target = event.target as HTMLInputElement;
       this.currentId = parseInt(target.id);
 
-      this.currentName = this.socialMedia.find(s => s.Id == this.currentId)?.SocialMediaName;
-      this.currentUrl = this.socialMedia.find(s => s.Id == this.currentId)?.SocialMediaUrl;
+      this.currentName = this.socialMedia.find(s => s.id == this.currentId)?.socialMediaName;
+      this.currentUrl = this.socialMedia.find(s => s.id == this.currentId)?.socialMediaUrl;
     }
   }
 
@@ -56,12 +57,17 @@ export class SocialMediaComponent {
   }
 
   onSubmit() {
+    if(this.currentName === '' || this.currentUrl === '') {
+      alert('Please fill out all fields');
+      return;
+    }
+    
     if(this.isAdding) {
-      // todo: add logic to get max Id value or get the social media list from database again
-      this.socialMedia.push({Id: ++this.currentId, SocialMediaName: this.currentName, SocialMediaUrl: this.currentUrl});
+      // todo: call the service to get the social media list
+      this.socialMedia.push({id: ++this.currentId, socialMediaName: this.currentName, socialMediaUrl: this.currentUrl});
     }
     else {
-      this.socialMedia = this.socialMedia.map(s => s.Id == this.currentId? {Id: this.currentId, SocialMediaName: this.currentName, SocialMediaUrl: this.currentUrl} : s);
+      this.socialMedia = this.socialMedia.map(s => s.id == this.currentId? {id: this.currentId, socialMediaName: this.currentName, socialMediaUrl: this.currentUrl} : s);
     }
     this.closeModal();
   }

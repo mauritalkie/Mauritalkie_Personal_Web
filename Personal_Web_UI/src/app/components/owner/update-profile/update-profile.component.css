@@ -34,13 +34,17 @@ img {
 
 label {
     background-color: #6A5ACD;
-    width: 87%;
+    width: 77%;
     font-size: 20px;
 }
 
 label input  {
     height: 15px;
     width: 15px;
+}
+
+input:disabled {
+    background-color: #ccc;
 }
 
 .container {
@@ -53,7 +57,7 @@ label input  {
 .login-container {
     margin-top: 190px;
     height: 650px;
-    width: 30%;
+    width: 35%;
     color: #FFF;
     display: flex;
     justify-content: center;

@@ -1,7 +1,7 @@
 <body>
     <app-navbar></app-navbar>
     <div class="area-container">
-        <textarea name="" id=""></textarea>
-        <button>Save</button>
+        <textarea [(ngModel)]="currentAboutMe"></textarea>
+        <button (click)="saveAboutMe()">Save</button>
     </div>
 </body>

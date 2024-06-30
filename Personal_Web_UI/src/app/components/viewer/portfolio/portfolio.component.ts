@@ -18,6 +18,6 @@ export class PortfolioComponent {
   constructor(private service: ProjectService) { }
 
   ngOnInit(): void {
-    this.service.getProjects().subscribe((response) => this.projects = response);
+    this.service.getProjectsViewer().subscribe((response) => this.projects = response);
   }
 }

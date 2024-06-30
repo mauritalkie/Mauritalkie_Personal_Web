@@ -12,7 +12,11 @@ export class SocialMediaService {
 
   constructor(private http: HttpClient) { }
 
-  public getSocialMedia(): Observable<GetSocialMedia[]> {
-    return this.http.get<GetSocialMedia[]>(`${environment.apiUrl}/${this.url}/1`);
+  public getSocialMediaViewer(): Observable<GetSocialMedia[]> {
+    return this.http.get<GetSocialMedia[]>(`${environment.apiUrl}/${this.url}/Viewer/GetSocialMedia`);
+  }
+
+  public getSocialMediaOwner(): Observable<GetSocialMedia[]> {
+    return this.http.get<GetSocialMedia[]>(`${environment.apiUrl}/${this.url}/Owner/GetSocialMedia`);
   }
 }

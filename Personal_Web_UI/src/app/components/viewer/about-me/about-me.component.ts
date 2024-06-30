@@ -53,7 +53,7 @@ export class AboutMeComponent {
   ngOnInit(): void {
     this.selectedOption = this.options[0].value;
 
-    this.userService.displayUserInfo().subscribe((response) => {
+    this.userService.displayUserInfoViewer().subscribe((response) => {
       this.info = response;
       
       this.info.forEach((item) => {
@@ -63,9 +63,9 @@ export class AboutMeComponent {
       });
     });
 
-    this.socialMediaService.getSocialMedia().subscribe((response) => this.socialMedia = response);
-    this.skillService.getSkills().subscribe((response) => this.skills = response);
-    this.experienceService.getExperience().subscribe((response) => this.experience = response);
-    this.futureProjectsService.getFutureProjects().subscribe((response) => this.futureProjects = response);
+    this.socialMediaService.getSocialMediaViewer().subscribe((response) => this.socialMedia = response);
+    this.skillService.getSkillsViewer().subscribe((response) => this.skills = response);
+    this.experienceService.getExperienceViewer().subscribe((response) => this.experience = response);
+    this.futureProjectsService.getFutureProjectsViewer().subscribe((response) => this.futureProjects = response);
   }
 }

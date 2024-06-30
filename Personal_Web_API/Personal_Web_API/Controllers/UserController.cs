@@ -35,7 +35,7 @@ namespace Personal_Web_API.Controllers
 		}
 
 		[HttpPost("Login")]
-		public async Task<ActionResult<string>> Login(LoginUser userDto)
+		public async Task<ActionResult<SessionUser>> Login(LoginUser userDto)
 		{
 			return await _userService.Login(userDto);
 		}

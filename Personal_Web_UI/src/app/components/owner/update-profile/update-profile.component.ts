@@ -39,4 +39,25 @@ export class UpdateProfileComponent {
       }
     }
   }
+
+  updateProfile() {
+    if(this.currentUsername === '') {
+      alert('Please enter an username');
+      return;
+    }
+
+    if(this.isChecked && (this.newPassword === '' || this.confirmPassword === '')) {
+      alert('Please fill out the password fields');
+      return;
+    }
+
+    if(this.isChecked && this.newPassword!== this.confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    alert('User updated successfully');
+
+    // todo: call the service
+  }
 }

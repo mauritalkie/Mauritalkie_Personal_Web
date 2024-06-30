@@ -1,3 +1,14 @@
 export class GetAboutMe {
-    AboutMeDescription?: string;
+    id?: number;
+    aboutMeDescription?: string;
+}
+
+export class CreateAboutMe {
+    aboutMeDescription?: string;
+    aboutMeUserId?: number;
+}
+
+export class UpdateAboutMe {
+    id?: number;
+    aboutMeDescription?: string;
 }

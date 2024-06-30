@@ -1,0 +1,26 @@
+div {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+textarea {
+    width: 80%;
+    height: 375px;
+    border: 2px solid #000;
+    font-size: 27px;
+    background-color: #FFF;
+}
+
+button {
+    background-color: #4682B4;
+    width: 200px;
+    height: 40px;
+    color: #FFF;
+    font-size: 27px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}

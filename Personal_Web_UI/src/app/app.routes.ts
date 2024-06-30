@@ -8,6 +8,8 @@ import { AdminPortfolioComponent } from './components/owner/portfolio/portfolio.
 import { LoginComponent } from './components/owner/login/login.component';
 import { ProjectsComponent } from './components/owner/projects/projects.component';
 import { SocialMediaComponent } from './components/owner/social-media/social-media.component';
+import { ManageAboutMeComponent } from './components/owner/manage-about-me/manage-about-me.component';
+import { UpdateProfileComponent } from './components/owner/update-profile/update-profile.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -20,5 +22,7 @@ export const routes: Routes = [
     {path: 'admin/portfolio', component: AdminPortfolioComponent},
     {path: 'login', component: LoginComponent},
     {path: 'projects', component: ProjectsComponent},
-    {path: 'social_media', component: SocialMediaComponent}
+    {path: 'social_media', component: SocialMediaComponent},
+    {path: 'manage_about_me', component: ManageAboutMeComponent},
+    {path: 'update_profile', component: UpdateProfileComponent}
 ];

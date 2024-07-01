@@ -1,23 +1,35 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from '../../../services/user.service';
+import { UpdateUser } from '../../../dtos/User';
 
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [NavbarComponent, FormsModule],
+  imports: [NavbarComponent, FormsModule, HttpClientModule],
   templateUrl: './update-profile.component.html',
   styleUrl: './update-profile.component.css'
 })
 export class UpdateProfileComponent {
   isChecked: boolean = false;
 
-  currentImage: string = 'https://i.pinimg.com/originals/e6/f7/33/e6f733eedd4aa92d12ed173cd08c5f7a.jpg'
-  currentUsername: string = '';
+  currentImage?: string = ''
+  currentUsername?: string = '';
   newPassword: string = '';
   confirmPassword: string = '';
 
   @ViewChild('fileInput') fileInput!: ElementRef;
+
+  constructor(private service: UserService) { }
+
+  ngOnInit() {
+    this.service.getCurrentUser().subscribe(user => {
+      this.currentUsername = user.username;
+      this.currentImage = user.userPictureUrl;
+    });
+  }
 
   emptyPasswordFields() {
     if(!this.isChecked) {
@@ -56,8 +68,15 @@ export class UpdateProfileComponent {
       return;
     }
 
-    alert('User updated successfully');
+    const updateUser = new UpdateUser();
+    updateUser.username = this.currentUsername;
+    updateUser.userPictureUrl = this.currentImage;
+    updateUser.userPassword = this.newPassword;
 
-    // todo: call the service
+    this.service.updateUser(updateUser).subscribe();
+
+    alert('User updated successfully');
+    this.newPassword = '';
+    this.confirmPassword = '';
   }
 }

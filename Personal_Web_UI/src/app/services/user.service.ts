@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DisplayUserInfo, LoginUser } from '../dtos/User';
+import { DisplayUserInfo, GetUser, LoginUser, UpdateUser } from '../dtos/User';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -28,5 +28,13 @@ export class UserService {
     return this.http.get(`${environment.apiUrl}/${this.url}/GetMyName`, {
       responseType: 'text'
     });
+  }
+
+  public getCurrentUser(): Observable<GetUser> {
+    return this.http.get<GetUser>(`${environment.apiUrl}/${this.url}/GetCurrentUser`);
+  }
+
+  public updateUser(updateUser: UpdateUser): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/${this.url}/Update`, updateUser);
   }
 }

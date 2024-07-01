@@ -7,12 +7,10 @@ export class GetSocialMedia {
 export class CreateSocialMedia {
     socialMediaName?: string;
     socialMediaUrl?: string;
-    socialMediaUserId?: number;
     
-    constructor(socialMediaName: string, socialMediaUrl: string, socialMediaUserId: number) {
+    constructor(socialMediaName?: string, socialMediaUrl?: string) {
         this.socialMediaName = socialMediaName;
         this.socialMediaUrl = socialMediaUrl;
-        this.socialMediaUserId = socialMediaUserId;
     }
  }
 
@@ -21,7 +19,7 @@ export class CreateSocialMedia {
     socialMediaName?: string;
     socialMediaUrl?: string;
 
-    constructor(id: number, socialMediaName: string, socialMediaUrl: string) {
+    constructor(id?: number, socialMediaName?: string, socialMediaUrl?: string) {
         this.id = id;
         this.socialMediaName = socialMediaName;
         this.socialMediaUrl = socialMediaUrl;

@@ -72,6 +72,7 @@ namespace Personal_Web_API.Services.Implementations
 			if (dbProject == null) return new JsonResult("Project not found");
 
 			dbProject.ProjectName = projectDto.ProjectName;
+			dbProject.ProjectDescription = projectDto.ProjectDescription;
 			dbProject.ProjectUrl = projectDto.ProjectUrl;
 			dbProject.ImageUrl = projectDto.ImageUrl;
 			dbProject.UpdatedAt = DateTime.Now;

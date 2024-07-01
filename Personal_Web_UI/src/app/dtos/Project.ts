@@ -11,29 +11,27 @@ export class CreateProject {
     ProjectDescription?: string;
     ProjectUrl?: string;
     ImageUrl?: string;
-    projectUserId?: number;
 
-    constructor(projectName: string, ProjectDescription: string, projectUrl: string, ImageUrl: string, projectUserId: number) {
+    constructor(projectName?: string, ProjectDescription?: string, projectUrl?: string, ImageUrl?: string) {
         this.ProjectName = projectName;
         this.ProjectDescription = ProjectDescription;
         this.ProjectUrl = projectUrl;
         this.ImageUrl = ImageUrl;
-        this.projectUserId = projectUserId;
     }
 }
 
 export class UpdateProject {
     id?: number;
-    ProjectName?: string;
-    ProjectDescription?: string;
-    ProjectUrl?: string;
-    ImageUrl?: string;
+    projectName?: string;
+    projectDescription?: string;
+    projectUrl?: string;
+    imageUrl?: string;
 
-    constructor(id: number, projectName: string, ProjectDescription: string, projectUrl: string, imageUrl: string){
+    constructor(id?: number, projectName?: string, ProjectDescription?: string, projectUrl?: string, imageUrl?: string){
         this.id = id;
-        this.ProjectName = projectName;
-        this.ProjectDescription = ProjectDescription;
-        this.ProjectUrl = projectUrl;
-        this.ImageUrl = imageUrl;
+        this.projectName = projectName;
+        this.projectDescription = ProjectDescription;
+        this.projectUrl = projectUrl;
+        this.imageUrl = imageUrl;
     }
 }

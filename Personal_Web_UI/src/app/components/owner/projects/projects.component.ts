@@ -1,8 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { GetProject } from '../../../dtos/Project';
+import { CreateProject, GetProject, UpdateProject } from '../../../dtos/Project';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ProjectService } from '../../../services/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -21,41 +22,17 @@ export class ProjectsComponent {
   currentUrl?: string = '';
   currentImage?: string = 'https://linamed.com/wp-content/themes/dfd-native/assets/images/no_image_resized_675-450.jpg';
 
+  newProjectData: any;
+  updateProjectData: any;
+
+  constructor(private service: ProjectService) { }
+
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-  projects: GetProject[] = [
-    {
-      id: 1, 
-      projectName: 'First Project',
-      projectDescription: 'Its Reimu Project',
-      projectUrl: 'https://example',
-      imageUrl: 'https://i.pinimg.com/originals/e6/f7/33/e6f733eedd4aa92d12ed173cd08c5f7a.jpg'
-    },
-    {
-      id: 2, 
-      projectName: 'Second Project',
-      projectDescription: 'Its Marisa Project',
-      projectUrl: 'https://example',
-      imageUrl: 'https://i.pinimg.com/564x/8c/06/61/8c06617b7f297edae1f1804df6223184.jpg'
-    },
-    {
-      id: 3, 
-      projectName: 'Third Project',
-      projectDescription: 'Its Sanae Project',
-      projectUrl: 'https://example',
-      imageUrl: 'https://i.pinimg.com/originals/0c/68/72/0c6872b1d634c1ed733a594af4508a5a.jpg'
-    },
-    {
-      id: 4, 
-      projectName: 'Fourth Project',
-      projectDescription: 'Its Sakuya Project',
-      projectUrl: 'https://example',
-      imageUrl: 'https://i.pinimg.com/564x/7c/8a/36/7c8a36f2a9eb2ab8d2ed8e52cc02cc11.jpg'
-    }
-  ]
+  projects: GetProject[] = []
 
   ngOnInit() {
-    console.log(this.selectedProject);
+    this.getProjects();
   }
 
   onProjectChange(){
@@ -86,11 +63,35 @@ export class ProjectsComponent {
           imageUrl: this.currentImage
         } : p);
 
+        this.updateProjectData = new UpdateProject (
+          this.selectedProject, 
+          this.currentName, 
+          this.currentDescription, 
+          this.currentUrl, 
+          this.currentImage
+        );
+
+        this.service.updateProject(this.updateProjectData).subscribe();
+        
         alert('Project updated successfully');
     }
     else {
-      //todo: call the service
-      alert('Creating project');
+      this.newProjectData = new CreateProject (
+        this.currentName, 
+        this.currentDescription, 
+        this.currentUrl, 
+        this.currentImage 
+      );
+
+      this.service.createProject(this.newProjectData).subscribe(response => {
+        alert('Project created successfully');
+
+        this.currentName = '';
+        this.currentDescription = '';
+        this.currentUrl = '';
+
+        this.getProjects();
+      });
     }
   }
 
@@ -106,5 +107,9 @@ export class ProjectsComponent {
         this.currentImage = event.target.result;
       }
     }
+  }
+
+  getProjects() {
+    this.service.getProjectsOwner().subscribe((response) => this.projects = response);
   }
 }

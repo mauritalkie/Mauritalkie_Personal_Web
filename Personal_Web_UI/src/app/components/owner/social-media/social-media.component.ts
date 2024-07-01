@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { GetSocialMedia } from '../../../dtos/SocialMedia';
+import { CreateSocialMedia, GetSocialMedia, UpdateSocialMedia } from '../../../dtos/SocialMedia';
 import { ModalComponent } from '../modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { SocialMediaService } from '../../../services/social-media.service';
 
 @Component({
   selector: 'app-social-media',
@@ -20,20 +21,20 @@ export class SocialMediaComponent {
   currentName?: string = '';
   currentUrl?: string = '';
 
-  socialMedia: GetSocialMedia[] = [
-    {id: 1, socialMediaName: 'quora', socialMediaUrl: 'quora.com'},
-    {id: 2, socialMediaName: 'facebook', socialMediaUrl: 'facebook.com'},
-    {id: 3, socialMediaName: 'twitter', socialMediaUrl: 'twitter.com'},
-    {id: 4, socialMediaName: 'instagram', socialMediaUrl: 'instagram.com'},
-    {id: 5, socialMediaName: 'youtube', socialMediaUrl: 'youtube.com'},
-    {id: 6, socialMediaName: 'linkedin', socialMediaUrl: 'linkedin.com'},
-    {id: 7, socialMediaName: 'github', socialMediaUrl: 'github.com'},
-    {id: 8, socialMediaName: 'pinterest', socialMediaUrl: 'pinterest.com'},
-  ];
+  socialMedia: GetSocialMedia[] = [];
+
+  newSocialMedia: any;
+  updateSocialMedia: any;
+
+  constructor(private service: SocialMediaService) { }
+
+  ngOnInit() {
+    this.getSocialMedia();
+  }
 
   deleteSocialMedia(id: any) {
-    //todo: call the remove service method
     this.socialMedia = this.socialMedia.filter(item => item.id!== id);
+    this.service.deleteSocialMedia(id).subscribe();
   }
 
   openModal(state: boolean, action: string, event: Event) {
@@ -63,12 +64,23 @@ export class SocialMediaComponent {
     }
     
     if(this.isAdding) {
-      // todo: call the service to get the social media list
-      this.socialMedia.push({id: ++this.currentId, socialMediaName: this.currentName, socialMediaUrl: this.currentUrl});
+      this.newSocialMedia = new CreateSocialMedia(this.currentName, this.currentUrl);
+      this.service.createSocialMedia(this.newSocialMedia).subscribe(response => {
+        alert("Social media created successfully");
+        this.getSocialMedia();
+      });
     }
     else {
       this.socialMedia = this.socialMedia.map(s => s.id == this.currentId? {id: this.currentId, socialMediaName: this.currentName, socialMediaUrl: this.currentUrl} : s);
+      this.updateSocialMedia = new UpdateSocialMedia(this.currentId, this.currentName, this.currentUrl);
+      this.service.updateSocialMedia(this.updateSocialMedia).subscribe();
+      alert("Social media updated successfully");
     }
+
     this.closeModal();
+  }
+
+  getSocialMedia() {
+    this.service.getSocialMediaOwner().subscribe(response => this.socialMedia = response)
   }
 }

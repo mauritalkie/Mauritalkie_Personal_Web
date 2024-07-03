@@ -12,8 +12,12 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  public getProjects(): Observable<GetProject[]> {
-    return this.http.get<GetProject[]>(`${environment.apiUrl}/${this.url}/Projects/1`);
+  public getProjectsViewer(): Observable<GetProject[]> {
+    return this.http.get<GetProject[]>(`${environment.apiUrl}/${this.url}/Viewer/GetProjects`);
+  }
+
+  public getProjectsOwner(): Observable<GetProject[]> {
+    return this.http.get<GetProject[]>(`${environment.apiUrl}/${this.url}/Owner/GetProjects`);
   }
 
   public createProject(project: CreateProject): Observable<any> {

@@ -12,7 +12,11 @@ export class ExperienceService {
 
   constructor(private http: HttpClient) { }
 
-  public getExperience() : Observable<GetExperience[]> {
-    return this.http.get<GetExperience[]>(`${environment.apiUrl}/${this.url}/1`);
+  public getExperienceViewer() : Observable<GetExperience[]> {
+    return this.http.get<GetExperience[]>(`${environment.apiUrl}/${this.url}/Viewer/GetExperience`);
+  }
+
+  public getExperienceOwner() : Observable<GetExperience[]> {
+    return this.http.get<GetExperience[]>(`${environment.apiUrl}/${this.url}/Owner/GetExperience`);
   }
 }

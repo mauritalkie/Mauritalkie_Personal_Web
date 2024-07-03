@@ -30,26 +30,26 @@ public partial class PersonalWebDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-	public virtual DbSet<DisplayUserInfo> DisplayUsers { get; set; }
+    public virtual DbSet<DisplayUserInfo> DisplayUsers { get; set; }
 
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
-		if (!optionsBuilder.IsConfigured)
-		{
-			IConfigurationRoot configuration = new ConfigurationBuilder()
-				.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-				.AddJsonFile("appsettings.json")
-				.Build();
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
 
-			optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-		}
-	}
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+        }
+    }
 
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AboutMe>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__AboutMe__3213E83F1F554F85");
+            entity.HasKey(e => e.Id).HasName("PK__AboutMe__3213E83FAF124BFF");
 
             entity.ToTable("AboutMe");
 
@@ -76,7 +76,7 @@ public partial class PersonalWebDbContext : DbContext
 
         modelBuilder.Entity<Experience>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Experien__3213E83FB698F17B");
+            entity.HasKey(e => e.Id).HasName("PK__Experien__3213E83F298EEB05");
 
             entity.ToTable("Experience");
 
@@ -103,7 +103,7 @@ public partial class PersonalWebDbContext : DbContext
 
         modelBuilder.Entity<FutureProject>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__FuturePr__3213E83FEB0E38C3");
+            entity.HasKey(e => e.Id).HasName("PK__FuturePr__3213E83F81CD38D4");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
@@ -128,7 +128,7 @@ public partial class PersonalWebDbContext : DbContext
 
         modelBuilder.Entity<Project>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Projects__3213E83FC06D7E6B");
+            entity.HasKey(e => e.Id).HasName("PK__Projects__3213E83F02F031CD");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
@@ -136,7 +136,6 @@ public partial class PersonalWebDbContext : DbContext
                 .HasColumnType("smalldatetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.ImageUrl)
-                .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("image_url");
             entity.Property(e => e.ProjectDescription)
@@ -165,7 +164,7 @@ public partial class PersonalWebDbContext : DbContext
 
         modelBuilder.Entity<Skill>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Skills__3213E83F22DCFE2B");
+            entity.HasKey(e => e.Id).HasName("PK__Skills__3213E83F3B808C19");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
@@ -190,17 +189,13 @@ public partial class PersonalWebDbContext : DbContext
 
         modelBuilder.Entity<SocialMedium>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__SocialMe__3213E83FBE6A8CB2");
+            entity.HasKey(e => e.Id).HasName("PK__SocialMe__3213E83F98D18809");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("smalldatetime")
                 .HasColumnName("created_at");
-            entity.Property(e => e.ImageUrl)
-                .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("image_url");
             entity.Property(e => e.SocialMediaName)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -223,7 +218,7 @@ public partial class PersonalWebDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F9C4DDECE");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83FFD9E75C9");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
@@ -239,7 +234,6 @@ public partial class PersonalWebDbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("user_hashed_password");
             entity.Property(e => e.UserPictureUrl)
-                .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("user_picture_url");
             entity.Property(e => e.Username)
@@ -248,19 +242,19 @@ public partial class PersonalWebDbContext : DbContext
                 .HasColumnName("username");
         });
 
-		modelBuilder.Entity<DisplayUserInfo>(entity =>
-		{
-			entity.HasNoKey();
+        modelBuilder.Entity<DisplayUserInfo>(entity =>
+        {
+            entity.HasNoKey();
 
-			entity.Property(e => e.Username)
-			   .HasMaxLength(50)
-			   .IsUnicode(false)
-			   .HasColumnName("username");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("username");
 
 			entity.Property(e => e.UserPictureUrl)
-			   .HasMaxLength(255)
-			   .IsUnicode(false)
-			   .HasColumnName("user_picture_url");
+		        .HasMaxLength(255)
+		        .IsUnicode(false)
+		        .HasColumnName("user_picture_url");
 
 			entity.Property(e => e.AboutMeDescription)
 			   .HasMaxLength(255)
@@ -268,7 +262,7 @@ public partial class PersonalWebDbContext : DbContext
 			   .HasColumnName("about_me_description");
 		});
 
-		OnModelCreatingPartial(modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

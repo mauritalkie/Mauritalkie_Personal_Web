@@ -7,7 +7,19 @@ namespace Personal_Web_API.Mappers
 	{
 		public static GetAboutMe AsDto(AboutMe obj)
 		{
-			return new GetAboutMe(obj.AboutMeDescription);
+			return new GetAboutMe (
+				obj.Id,
+				obj.AboutMeDescription
+			);
+		}
+
+		public static AboutMe AsObject(CreateAboutMe dto)
+		{
+			return new AboutMe
+			{
+				AboutMeDescription = dto.AboutMeDescription,
+				AboutMeUserId = dto.AboutMeUserId
+			};
 		}
 	}
 }

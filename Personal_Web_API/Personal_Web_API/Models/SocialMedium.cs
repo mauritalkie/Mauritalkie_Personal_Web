@@ -11,8 +11,6 @@ public partial class SocialMedium
 
     public string SocialMediaUrl { get; set; } = null!;
 
-    public string ImageUrl { get; set; } = null!;
-
     public int SocialMediaUserId { get; set; }
 
     public DateTime? CreatedAt { get; set; }

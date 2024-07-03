@@ -10,14 +10,17 @@ namespace Personal_Web_API.Services.Implementations
 	public class ProjectService : IProjectService
 	{
 		private readonly PersonalWebDbContext _context;
+		private readonly IUserService _userService;
 
-		public ProjectService(PersonalWebDbContext context)
+		public ProjectService(PersonalWebDbContext context, IUserService userService)
 		{
 			_context = context;
+			_userService = userService;
 		}
 
 		public async Task<ActionResult> CreateProject(CreateProject projectDto)
 		{
+			projectDto.ProjectUserId = int.Parse(_userService.GetMyId());
 			Project project = ProjectMapper.AsObject(projectDto);
 
 			_context.Projects.Add(project);
@@ -45,28 +48,33 @@ namespace Personal_Web_API.Services.Implementations
 			return ProjectMapper.AsDto(dbProject);
 		}
 
-		public async Task<List<GetProject>> GetProjects(int? userId = null)
+		public async Task<List<GetProject>> GetProjectsOwner()
 		{
+			int userId = int.Parse(_userService.GetMyId());
 			IQueryable<Project> query = _context.Projects;
-
-			if (userId.HasValue)
-			{
-				query = query.Where(p => p.ProjectUserId == userId);
-			}
-
+			query = query.Where(p => p.ProjectUserId == userId);
+			
 			List<Project> objects = await query.ToListAsync();
 			List<GetProject> dtos = objects.Select(obj => ProjectMapper.AsDto(obj)).ToList();
 			return dtos;
 		}
 
-		public async Task<ActionResult> UpdateProject(UpdateProject project)
+		public async Task<List<GetProject>> GetProjectsViewer()
 		{
-			var dbProject = await _context.Projects.FindAsync(project.Id);
+			List<Project> objects = await _context.Projects.ToListAsync();
+			List<GetProject> dtos = objects.Select(obj => ProjectMapper.AsDto(obj)).ToList();
+			return dtos;
+		}
+
+		public async Task<ActionResult> UpdateProject(UpdateProject projectDto)
+		{
+			var dbProject = await _context.Projects.FindAsync(projectDto.Id);
 			if (dbProject == null) return new JsonResult("Project not found");
 
-			dbProject.ProjectName = project.ProjectName;
-			dbProject.ProjectUrl = project.ProjectUrl;
-			dbProject.ImageUrl = project.ImageUrl;
+			dbProject.ProjectName = projectDto.ProjectName;
+			dbProject.ProjectDescription = projectDto.ProjectDescription;
+			dbProject.ProjectUrl = projectDto.ProjectUrl;
+			dbProject.ImageUrl = projectDto.ImageUrl;
 			dbProject.UpdatedAt = DateTime.Now;
 
 			await _context.SaveChangesAsync();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Personal_Web_API.Dtos;
 using Personal_Web_API.Services.Interfaces;
@@ -16,10 +17,16 @@ namespace Personal_Web_API.Controllers
 			_experienceService = experienceService;
 		}
 
-		[HttpGet("{userId}")]
-		public async Task<ActionResult<List<GetExperience>>> GetExperience(int userId)
+		[HttpGet("Owner/GetExperience"), Authorize]
+		public async Task<ActionResult<List<GetExperience>>> GetExperienceOwner()
 		{
-			return await _experienceService.GetExperience(userId);
+			return await _experienceService.GetExperienceOwner();
+		}
+
+		[HttpGet("Viewer/GetExperience")]
+		public async Task<ActionResult<List<GetExperience>>> GetExperienceViewer()
+		{
+			return await _experienceService.GetExperienceViewer();
 		}
 	}
 }

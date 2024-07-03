@@ -1,0 +1,39 @@
+<body>
+    <app-navbar></app-navbar>
+
+    <h1>Manage Projects</h1>
+
+    <div class="select-container">
+        <select [(ngModel)]="selectedProject" (change)="onProjectChange()">
+            <option *ngFor="let project of projects" [value]="project.id">{{ project.projectName }}</option>
+        </select>
+    </div>
+
+    <div class="info-container">
+        <div class="image-container">
+            <img [src]="currentImage" (click)="onImageClick()">
+            <input type="file" #fileInput (change)="onSelectFile($event)" style="display: none;">
+        </div>
+
+        <div class="field-container">
+            <div class="field">
+                <p>Project Name</p>
+                <input type="text" [(ngModel)]="currentName">
+            </div>
+
+            <div class="field">
+                <p>Project Description</p>
+                <input type="text" [(ngModel)]="currentDescription">
+            </div>
+
+            <div class="field">
+                <p>Project Link</p>
+                <input type="text" [(ngModel)]="currentUrl">
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container" (click)="submitProject()">
+        <button>{{ buttonText }}</button>
+    </div>
+</body>

@@ -62,8 +62,14 @@ namespace Personal_Web_API.Services.Implementations
 			return new JsonResult("User created successfully");
 		}
 
-		public async Task<ActionResult<List<DisplayUserInfo>>> DisplayUserInfo(int userId)
+		public async Task<ActionResult<List<DisplayUserInfo>>> DisplayUserInfoViewer(int userId)
 		{
+			return await _context.DisplayUsers.FromSqlInterpolated($"EXEC sp_display_user_info {userId}").ToListAsync();
+		}
+
+		public async Task<ActionResult<List<DisplayUserInfo>>> DisplayUserInfoOwner()
+		{
+			int userId = int.Parse(GetMyId());
 			return await _context.DisplayUsers.FromSqlInterpolated($"EXEC sp_display_user_info {userId}").ToListAsync();
 		}
 
@@ -83,9 +89,9 @@ namespace Personal_Web_API.Services.Implementations
 
 			userDto.Id = dbUser.Id;
 
-			string token = CreateToken(userDto);
+			SessionUser sessionUser = new SessionUser(CreateToken(userDto));
 
-			return UserMapper.AsDto(token);
+			return sessionUser;
 		}
 
 		public string GetMyName()
@@ -106,6 +112,33 @@ namespace Personal_Web_API.Services.Implementations
 				result = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 			}
 			return result;
+		}
+
+		public async Task<ActionResult> UpdateUser(UpdateUser userDto)
+		{
+			int userId = int.Parse(GetMyId());
+			var dbUser = await _context.Users.FindAsync(userId);
+			if (dbUser == null) return new JsonResult("User not found");
+
+			dbUser.Username = userDto.Username;
+			dbUser.UserPictureUrl = userDto.UserPictureUrl;
+			dbUser.UpdatedAt = DateTime.Now;
+
+			if (userDto.UserPassword != string.Empty)
+				dbUser.UserHashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.UserPassword);
+
+			await _context.SaveChangesAsync();
+			return new JsonResult("User updated successfully");
+		}
+
+		public async Task<ActionResult<GetUser>> GetCurrentUser()
+		{
+			int userId = int.Parse(GetMyId());
+			var dbUser = await _context.Users.FindAsync(userId);
+
+			if (dbUser == null) return new JsonResult("User not found");
+
+			return UserMapper.AsDto(dbUser);
 		}
 	}
 }

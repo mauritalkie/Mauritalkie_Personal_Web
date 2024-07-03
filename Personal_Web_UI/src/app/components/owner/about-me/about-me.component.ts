@@ -13,13 +13,13 @@ import { SocialMediaService } from '../../../services/social-media.service';
 import { SkillService } from '../../../services/skill.service';
 import { ExperienceService } from '../../../services/experience.service';
 import { FutureProjectsService } from '../../../services/future-projects.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-about-me',
   standalone: true,
-  imports: [NavbarComponent, FormsModule, CommonModule, HttpClientModule],
-  providers: [UserService, SocialMediaService, SkillService, ExperienceService, FutureProjectsService],
+  imports: [NavbarComponent, FormsModule, CommonModule],
+  providers: [UserService, SocialMediaService, SkillService, ExperienceService, FutureProjectsService, HttpClient],
   templateUrl: './about-me.component.html',
   styleUrl: './about-me.component.css'
 })
@@ -53,7 +53,7 @@ export class AdminAboutMeComponent {
   ngOnInit() {
     this.selectedOption = this.options[0].value;
 
-    this.userService.displayUserInfo().subscribe((response) => {
+    this.userService.displayUserInfoOwner().subscribe((response) => {
       this.info = response;
       
       this.info.forEach((item) => {
@@ -63,9 +63,9 @@ export class AdminAboutMeComponent {
       });
     });
 
-    this.socialMediaService.getSocialMedia().subscribe((response) => this.socialMedia = response);
-    this.skillService.getSkills().subscribe((response) => this.skills = response);
-    this.experienceService.getExperience().subscribe((response) => this.experience = response);
-    this.futureProjectsService.getFutureProjects().subscribe((response) => this.futureProjects = response);
+    this.socialMediaService.getSocialMediaOwner().subscribe((response) => this.socialMedia = response);
+    this.skillService.getSkillsOwner().subscribe((response) => this.skills = response);
+    this.experienceService.getExperienceOwner().subscribe((response) => this.experience = response);
+    this.futureProjectsService.getFutureProjectsOwner().subscribe((response) => this.futureProjects = response);
   }
 }

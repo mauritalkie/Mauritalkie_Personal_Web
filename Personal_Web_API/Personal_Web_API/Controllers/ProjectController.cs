@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Personal_Web_API.Dtos;
@@ -18,25 +19,25 @@ namespace Personal_Web_API.Controllers
 			_projectService = projectService;
 		}
 
-		[HttpGet("Projects/{id}")]
-		public async Task<List<GetProject>> GetProjects(int id)
+		[HttpGet("Owner/GetProjects"), Authorize]
+		public async Task<List<GetProject>> GetProjectsOwner()
 		{
-			return await _projectService.GetProjects(id);
+			return await _projectService.GetProjectsOwner();
 		}
 
-		[HttpPost]
+		[HttpPost, Authorize]
 		public async Task<ActionResult> CreateProject(CreateProject projectDto)
 		{
 			return await _projectService.CreateProject(projectDto);
 		}
 
-		[HttpPut]
+		[HttpPut, Authorize]
 		public async Task<ActionResult> UpdateProject(UpdateProject projectDto)
 		{
 			return await _projectService.UpdateProject(projectDto);
 		}
 
-		[HttpDelete("{id}")]
+		[HttpDelete("{id}"), Authorize]
 		public async Task<ActionResult> DeleteProject(int id)
 		{
 			return await _projectService.DeleteProject(id);
@@ -46,6 +47,12 @@ namespace Personal_Web_API.Controllers
 		public async Task<ActionResult<GetProject>> GetProjectById(int id)
 		{
 			return await _projectService.GetProjectById(id);
+		}
+
+		[HttpGet("Viewer/GetProjects")]
+		public async Task<List<GetProject>> GetProjectsViewer()
+		{
+			return await _projectService.GetProjectsViewer();
 		}
 	}
 }

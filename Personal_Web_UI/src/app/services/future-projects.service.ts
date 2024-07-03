@@ -12,7 +12,11 @@ export class FutureProjectsService {
 
   constructor(private http: HttpClient) { }
 
-  public getFutureProjects() : Observable<GetFutureProject[]> {
-    return this.http.get<GetFutureProject[]>(`${environment.apiUrl}/${this.url}/1`);
+  public getFutureProjectsViewer() : Observable<GetFutureProject[]> {
+    return this.http.get<GetFutureProject[]>(`${environment.apiUrl}/${this.url}/Viewer/GetFutureProjects`);
+  }
+
+  public getFutureProjectsOwner() : Observable<GetFutureProject[]> {
+    return this.http.get<GetFutureProject[]>(`${environment.apiUrl}/${this.url}/Owner/GetFutureProjects`);
   }
 }

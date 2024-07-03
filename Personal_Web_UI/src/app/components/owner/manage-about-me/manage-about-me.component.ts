@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { AboutMeService } from '../../../services/about-me.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { GetAboutMe, UpdateAboutMe } from '../../../dtos/AboutMe';
 
 @Component({
   selector: 'app-manage-about-me',
   standalone: true,
-  imports: [NavbarComponent, FormsModule, HttpClientModule],
+  imports: [NavbarComponent, FormsModule],
+  providers: [HttpClient],
   templateUrl: './manage-about-me.component.html',
   styleUrl: './manage-about-me.component.css'
 })

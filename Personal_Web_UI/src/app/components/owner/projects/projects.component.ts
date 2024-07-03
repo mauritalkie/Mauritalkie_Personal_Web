@@ -4,11 +4,14 @@ import { CreateProject, GetProject, UpdateProject } from '../../../dtos/Project'
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../../services/project.service';
+import { CloudinaryService } from '../../../services/cloudinary.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
   imports: [NavbarComponent, FormsModule, CommonModule],
+  providers: [HttpClient],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })
@@ -24,8 +27,10 @@ export class ProjectsComponent {
 
   newProjectData: any;
   updateProjectData: any;
+  file: any;
+  // todo: add a boolean variable to control change image event
 
-  constructor(private service: ProjectService) { }
+  constructor(private service: ProjectService, private cloudinaryService: CloudinaryService) { }
 
   @ViewChild('fileInput') fileInput!: ElementRef;
 
@@ -52,7 +57,10 @@ export class ProjectsComponent {
     }
     
     if(this.updateProject) {
-      //todo: call the service
+
+      if(this.file) {
+        this.cloudinaryService.uploadImage(this.file).subscribe(url => this.currentImage = url);
+      }
       
       this.projects = this.projects.map(p => p.id == this.selectedProject? 
         {
@@ -76,6 +84,11 @@ export class ProjectsComponent {
         alert('Project updated successfully');
     }
     else {
+      
+      if(this.file) {
+        this.cloudinaryService.uploadImage(this.file).subscribe(url => this.currentImage = url);
+      }
+
       this.newProjectData = new CreateProject (
         this.currentName, 
         this.currentDescription, 
@@ -89,6 +102,7 @@ export class ProjectsComponent {
         this.currentName = '';
         this.currentDescription = '';
         this.currentUrl = '';
+        this.currentImage = 'https://linamed.com/wp-content/themes/dfd-native/assets/images/no_image_resized_675-450.jpg';
 
         this.getProjects();
       });
@@ -105,6 +119,7 @@ export class ProjectsComponent {
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
         this.currentImage = event.target.result;
+        this.file = e.target.files[0];
       }
     }
   }

@@ -3,7 +3,7 @@
 
     <div class="container">
         <div class="data-container">
-            <img src="https://i.pinimg.com/originals/e6/f7/33/e6f733eedd4aa92d12ed173cd08c5f7a.jpg">
+            <img [src]="imageUrl">
             <h3>{{username}}</h3>
             @for (media of socialMedia; track $index) {
                 <div class="social-media-container">

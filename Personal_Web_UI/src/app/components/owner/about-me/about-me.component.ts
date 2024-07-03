@@ -13,13 +13,13 @@ import { SocialMediaService } from '../../../services/social-media.service';
 import { SkillService } from '../../../services/skill.service';
 import { ExperienceService } from '../../../services/experience.service';
 import { FutureProjectsService } from '../../../services/future-projects.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-about-me',
   standalone: true,
-  imports: [NavbarComponent, FormsModule, CommonModule, HttpClientModule],
-  providers: [UserService, SocialMediaService, SkillService, ExperienceService, FutureProjectsService],
+  imports: [NavbarComponent, FormsModule, CommonModule],
+  providers: [UserService, SocialMediaService, SkillService, ExperienceService, FutureProjectsService, HttpClient],
   templateUrl: './about-me.component.html',
   styleUrl: './about-me.component.css'
 })

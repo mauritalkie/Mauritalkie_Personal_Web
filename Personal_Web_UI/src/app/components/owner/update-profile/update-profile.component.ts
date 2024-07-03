@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../services/user.service';
 import { UpdateUser } from '../../../dtos/User';
+import { CloudinaryService } from '../../../services/cloudinary.service';
 
 @Component({
   selector: 'app-update-profile',
@@ -14,6 +15,7 @@ import { UpdateUser } from '../../../dtos/User';
 })
 export class UpdateProfileComponent {
   isChecked: boolean = false;
+  file: any;
 
   currentImage?: string = ''
   currentUsername?: string = '';
@@ -22,7 +24,7 @@ export class UpdateProfileComponent {
 
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-  constructor(private service: UserService) { }
+  constructor(private service: UserService, private cloudinaryService: CloudinaryService) { }
 
   ngOnInit() {
     this.service.getCurrentUser().subscribe(user => {
@@ -48,11 +50,16 @@ export class UpdateProfileComponent {
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
         this.currentImage = event.target.result;
+        this.file = e.target.files[0];
       }
     }
   }
 
   updateProfile() {
+    if(this.file) {
+      this.cloudinaryService.uploadImage(this.file).subscribe(url => this.currentImage = url);
+    }
+    
     if(this.currentUsername === '') {
       alert('Please enter an username');
       return;

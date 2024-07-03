@@ -17,7 +17,7 @@ export class UserService {
   }
 
   public displayUserInfoOwner(): Observable<DisplayUserInfo[]> {
-    return this.http.get<DisplayUserInfo[]>(`${environment.apiUrl}/${this.url}/DisplayOwner`);
+    return this.http.get<DisplayUserInfo[]>(`${environment.apiUrl}/${this.url}/DisplayInfoOwner`);
   }
 
   public login(loginUser: LoginUser): Observable<any> {
